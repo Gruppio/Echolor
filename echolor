@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# Michele Gruppioni 2015
+# http://www.michelegruppioni.com
+
+# For more info
+# http://misc.flogisoft.com/bash/tip_colors_and_formatting
+
+# $1 Color Code [0 - 255]  
+# $2 The text
 function printColoredText {
 	if [[ $# -ne 2 ]] 
 	then
@@ -21,6 +29,10 @@ function printUsage {
 }
 
 
+
+# $1 = Red Component   [0 - 5]
+# $2 = Green Component [0 - 5]
+# $3 = Blue Component  [0 - 5]
 function getColorCode {
 
 	if [[ $# -ne 3 ]] 
@@ -46,7 +58,11 @@ function getColorCode {
 	echo $((16 + (36 * $1) + (6 * $2) + $3))
 }
 
-
+# $1 The option [-rgb5, -rgb100, -rgb255]
+# $2 Red Component
+# $3 Green Component
+# $4 Blue Component
+# $5 The Text to print
 function printTextWithRGBColor {
 
 	color=-1
@@ -71,11 +87,12 @@ function printTextWithRGBColor {
 		color=$(getColorCode $r $g $b)
 	fi
 
-	printColoredText $color $2 
+	printColoredText $color $5
 }
 
 
-
+# $1 The color tag (Capitalizes for bright colors)
+# $2 The text to print
 function printTextWithColor {
 
 	color=-1
@@ -102,7 +119,6 @@ function printTextWithColor {
 }
 
 # Main
-
 case $# in
 	1)
 		echo "$1"
