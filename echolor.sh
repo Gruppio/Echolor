@@ -20,6 +20,7 @@ function printUsage {
 	exit -1
 }
 
+
 function getColorCode {
 
 	if [[ $# -ne 3 ]] 
@@ -44,6 +45,7 @@ function getColorCode {
 
 	echo $((16 + (36 * $1) + (6 * $2) + $3))
 }
+
 
 function printTextWithRGBColor {
 
@@ -99,28 +101,7 @@ function printTextWithColor {
 	printColoredText $color $2 
 }
 
-function numberOfDashes {
-	string=$1
-	numDashes=0
-	characterIndex=0
-	while [ $characterIndex -lt ${#string} ] 
-	do
-		character=${string:characterIndex:1}
-		if [ "$character" == "-" ] 
-		then
-			characterIndex=$((characterIndex+1))
-			numDashes=$((numDashes+1))
-		else
-			break
-		fi
-	done
-	echo "$numDashes"
-}
-
-
-#numberOfParameters=$#
-#parameters=$*
-
+# Main
 
 case $# in
 	1)
@@ -139,12 +120,3 @@ case $# in
 		printUsage
 	;;
 esac
-
-
-
-#echo "$numberOfParameters"
-
-#for parameter in $parameters
-#do
-	#echo "$parameter"
-#done
