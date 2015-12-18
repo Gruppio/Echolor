@@ -149,7 +149,7 @@ do
 		-BK|--Black) 	color=16 ;;
 		-rgb5)
 			if [ $# -gt 3 ]; then
-				echo "$2 $3 $4"
+				echo "$# - $2 $3 $4"
 				color=$(getColorCode $2 $3 $4)
 				shift 3
 			else
