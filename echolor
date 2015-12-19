@@ -6,33 +6,37 @@
 # For more info
 # http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
-# $1 Foreground 1 / Background 0
-# $2 Color Code [0 - 255]  
 # $3 The text
+# $2 Color Code [0 - 255]  
+# $1 Foreground 0 / Background 1
 function printColoredText {
-	if [[ $# -ne 3 ]] 
-	then
-		printUsage
-	fi
+	#if [[ $# -ne 3 ]] 
+	#then
+	#	printUsage
+	#fi
 
 	foreground=38
+	background=48
 
-	if [[ $1 == 0 ]]
+	foregroundCode=$foreground
+
+	if [[ $3 == 1 ]]
 	then
-		foreground=48
+		foregroundCode=$background
 	fi
 
 	if [[ $2 -lt 0 ]] 
 	then
-		printf "\033[0m$3"
+		printf "\033[0m$1"
 	else
-		printf "\033[$foreground;5;$2m$3\033[0m"
+		printf "\033[$foregroundCode;5;$2m$1\033[0m"
 	fi
 }
 
 
 function printUsage {
-	echo "$0 Error - Print Usage"
+	printColoredText "\nError!\n" 1
+	printColoredText "example: echolor -B G -R o -Y o -B g -G l -R e\n"
 	exit -1
 }
 
@@ -50,16 +54,16 @@ function isInRange {
 # $2 = Green Component [0 - 5]
 # $3 = Blue Component  [0 - 5]
 function getColorCode {
-	if [[ $(isInRange $1 5) && $(isInRange $2 5) && $(isInRange $3 5) && $# == 3 ]]
+	if [[ $(isInRange $1 5) == 1 && $(isInRange $2 5) == 1 && $(isInRange $3 5) == 1 && $# == 3 ]]
 	then
 		echo $((16 + (36 * $1) + (6 * $2) + $3))
 	else
-		printUsage
+		echo $((-1))
 	fi
 }
 
 # Main
-foreground=1
+colorBackground=0
 color=-1
 while (( "$#" ))
 do
@@ -81,8 +85,8 @@ do
 		-C|--Cyan) 		color=14 ;;
 		-W|--White) 	color=15 ;;
 		-BK|--Black) 	color=16 ;;
-		-fg|--foreground) foreground=1 ;;
-		-bg|--background) foreground=0 ;;
+		-fg|--foreground) colorBackground=0 ;;
+		-bg|--background) colorBackground=1 ;;
 		-rgb5)
 			IFS=, read r g b <<< "$2"
 			if [[ $r && $g && $b ]]
@@ -120,7 +124,7 @@ do
 			fi
 		;;
 
-	    *) printColoredText $foreground $color "$1 " ;;
+	    *) printColoredText "$1" $color $colorBackground ;;
 	esac
 	shift
 done
