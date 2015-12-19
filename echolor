@@ -35,8 +35,9 @@ function printColoredText {
 
 
 function printUsage {
-	printColoredText "\nError!\n" 1
-	printColoredText "example: echolor -B G -R o -Y o -B g -G l -R e\n"
+	echolor -R "\nError!"
+	echolor -il -W "Example: " -C "echolor -B G -R o -Y o -B g -G l -R e" -W " will print: "
+	echolor -B G -R o -Y o -B g -G l -R e
 	exit -1
 }
 
@@ -63,30 +64,32 @@ function getColorCode {
 }
 
 # Main
-colorBackground=0
 color=-1
+colorBackground=0
+inline=0
 while (( "$#" ))
 do
 	case $1 in
-	    -bk|--black)	color=0 ;;
-		-r|--red) 		color=1 ;;
-		-g|--green) 	color=2 ;;
-		-y|--yellow) 	color=3 ;;
-		-b|--blue) 		color=4 ;;
-		-m|--magenta) 	color=5 ;;
-		-c|--cyan) 		color=6 ;;
-		-w|--white) 	color=7 ;;
-		-BK|--Black) 	color=8 ;;
-		-R|--Red) 		color=9 ;;
-		-G|--Green) 	color=10 ;;
-		-Y|--Yellow) 	color=11 ;;
-		-B|--Blue) 		color=12 ;;
-		-M|--Magenta) 	color=13 ;;
-		-C|--Cyan) 		color=14 ;;
-		-W|--White) 	color=15 ;;
-		-BK|--Black) 	color=16 ;;
-		-fg|--foreground) colorBackground=0 ;;
-		-bg|--background) colorBackground=1 ;;
+	    -bk|--black)		color=0 ;;
+		-r|--red) 			color=1 ;;
+		-g|--green) 		color=2 ;;
+		-y|--yellow) 		color=3 ;;
+		-b|--blue) 			color=4 ;;
+		-m|--magenta) 		color=5 ;;
+		-c|--cyan) 			color=6 ;;
+		-w|--white) 		color=7 ;;
+		-dg|--dark-grey) 	color=8 ;;
+		-R|--Red) 			color=9 ;;
+		-G|--Green) 		color=10 ;;
+		-Y|--Yellow) 		color=11 ;;
+		-B|--Blue) 			color=12 ;;
+		-M|--Magenta) 		color=13 ;;
+		-C|--Cyan) 			color=14 ;;
+		-W|--White) 		color=15 ;;
+		-BK|--Black) 		color=16 ;;
+		-fg|--foreground)	colorBackground=0 ;;
+		-bg|--background) 	colorBackground=1 ;;
+		-il|--in-line)		inline=1 ;;
 		-rgb5)
 			IFS=, read r g b <<< "$2"
 			if [[ $r && $g && $b ]]
@@ -129,5 +132,8 @@ do
 	shift
 done
 
-printf "\n"
+if [[ $inline == 0 ]]
+then
+	printf "\n"
+fi
 
