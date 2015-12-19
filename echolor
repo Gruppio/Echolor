@@ -136,6 +136,22 @@ do
 				printUsage
 			fi
 		;;
+		-hex)
+			if [[ $# != 0 ]]
+			then
+				hex=$2
+				r=$(printf "%d\n" 0x${hex:0:2}) 
+				g=$(printf "%d\n" 0x${hex:2:2})
+				b=$(printf "%d\n" 0x${hex:4:2})
+				r=$(($r/51))
+				g=$(($g/51))
+				b=$(($b/51))
+				color=$(getColorCode $r $g $b)
+				shift
+			else
+				printUsage
+			fi
+		;;
 		# Actually print the text
 	    *) 
 			printColoredText "$1" $color $colorBackground 
