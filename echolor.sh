@@ -63,6 +63,15 @@ function getColorCode {
 	fi
 }
 
+function rand {
+	max=255
+	if [[ $# -gt 1 ]]
+	then
+		max=$1
+	fi
+	echo $(($RANDOM %max))
+}
+
 # Main
 color=-1
 colorBackground=0
@@ -90,6 +99,7 @@ do
 		-fg|--foreground)	colorBackground=0 ;;
 		-bg|--background) 	colorBackground=1 ;;
 		-il|--in-line)		inline=1 ;;
+		-ran|--random)		color=$(rand 255) ;;
 		-rgb5)
 			IFS=, read r g b <<< "$2"
 			if [[ $r && $g && $b ]]
@@ -126,8 +136,10 @@ do
 				printUsage
 			fi
 		;;
-
-	    *) printColoredText "$1" $color $colorBackground ;;
+		# Actually print the text
+	    *) 
+			printColoredText "$1" $color $colorBackground 
+		;;
 	esac
 	shift
 done
