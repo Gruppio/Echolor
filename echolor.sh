@@ -70,6 +70,7 @@ inline=0
 while (( "$#" ))
 do
 	case $1 in
+		-h|--help)			printUsage ;;
 	    -bk|--black)		color=0 ;;
 		-r|--red) 			color=1 ;;
 		-g|--green) 		color=2 ;;
