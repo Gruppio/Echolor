@@ -44,7 +44,7 @@ function printColoredText {
 		rainbowColorIndex=$(($rainbowColorIndex %$numRainbowColors))
 	fi
 
-	printf "\033[$foregroundCode;5;$colorCodem$text\033[0m"
+	printf "\033[$foregroundCode;5;$colorCode m$text\033[0m"
 }
 
 
@@ -167,8 +167,8 @@ do
 		;;
 		# Actually print the text
 	    *) 
-			text="$1"
-			printColoredText $text $color $colorBackground 
+			text=$1
+			printColoredText "$text" $color $colorBackground 
 			if [[ $whitespace == 1 ]]
 			then
 				printf " "
