@@ -63,15 +63,6 @@ function getColorCode {
 	fi
 }
 
-function rand {
-	max=255
-	if [[ $# -gt 1 ]]
-	then
-		max=$1
-	fi
-	echo $(($RANDOM %max))
-}
-
 # Main
 color=-1
 colorBackground=0
@@ -79,6 +70,7 @@ inline=0
 while (( "$#" ))
 do
 	case $1 in
+		-h|--help)			printUsage ;;
 	    -bk|--black)		color=0 ;;
 		-r|--red) 			color=1 ;;
 		-g|--green) 		color=2 ;;
@@ -99,7 +91,7 @@ do
 		-fg|--foreground)	colorBackground=0 ;;
 		-bg|--background) 	colorBackground=1 ;;
 		-il|--in-line)		inline=1 ;;
-		-ran|--random)		color=$(rand 255) ;;
+		-ran|--random)		color=$(($RANDOM %255)) ;;
 		-rgb5)
 			IFS=, read r g b <<< "$2"
 			if [[ $r && $g && $b ]]
