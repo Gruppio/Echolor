@@ -77,15 +77,6 @@ function getColorCode {
 	fi
 }
 
-function rand {
-	max=255
-	if [[ $# -gt 1 ]]
-	then
-		max=$1
-	fi
-	echo $(($RANDOM %max))
-}
-
 # Main
 color=-1
 colorBackground=0
@@ -94,6 +85,30 @@ whitespace=1
 while (( "$#" ))
 do
 	case $1 in
+<<<<<<< HEAD
+		-h|--help)			printUsage ;;
+	    -bk|--black)		color=0 ;;
+		-r|--red) 			color=1 ;;
+		-g|--green) 		color=2 ;;
+		-y|--yellow) 		color=3 ;;
+		-b|--blue) 			color=4 ;;
+		-m|--magenta) 		color=5 ;;
+		-c|--cyan) 			color=6 ;;
+		-w|--white) 		color=7 ;;
+		-dg|--dark-grey) 	color=8 ;;
+		-R|--Red) 			color=9 ;;
+		-G|--Green) 		color=10 ;;
+		-Y|--Yellow) 		color=11 ;;
+		-B|--Blue) 			color=12 ;;
+		-M|--Magenta) 		color=13 ;;
+		-C|--Cyan) 			color=14 ;;
+		-W|--White) 		color=15 ;;
+		-BK|--Black) 		color=16 ;;
+		-fg|--foreground)	colorBackground=0 ;;
+		-bg|--background) 	colorBackground=1 ;;
+		-il|--in-line)		inline=1 ;;
+		-ran|--random)		color=$(($RANDOM %255)) ;;
+=======
 	    -bk|--black)			color=0 ;;
 		-r|--red) 				color=1 ;;
 		-g|--green) 			color=2 ;;
@@ -121,6 +136,7 @@ do
 			color=$rainbowColor
 			rainbowColorIndex=0
 		;;
+>>>>>>> RainbowFeature
 		-rgb5)
 			IFS=, read r g b <<< "$2"
 			if [[ $r && $g && $b ]]
