@@ -6,31 +6,45 @@
 # For more info
 # http://misc.flogisoft.com/bash/tip_colors_and_formatting
 
+
+rainbowColor=-2
+rainbowColorIndex=0
+rainbowColors=( 1 2 3 )
+
+foreground=38
+background=48
+
+
 # $3 The text
 # $2 Color Code [0 - 255]  
 # $1 Foreground 0 / Background 1
 function printColoredText {
-	#if [[ $# -ne 3 ]] 
-	#then
-	#	printUsage
-	#fi
 
-	foreground=38
-	background=48
-
-	foregroundCode=$foreground
+	text=$1
+	colorCode=$2
 
 	if [[ $3 == 1 ]]
 	then
 		foregroundCode=$background
+	else
+		foregroundCode=$foreground
 	fi
 
-	if [[ $2 -lt 0 ]] 
+	if [[ $colorCode == -1 ]] 
 	then
-		printf "\033[0m$1"
-	else
-		printf "\033[$foregroundCode;5;$2m$1\033[0m"
+		printf "\033[0m$text"
+		return
 	fi
+
+	if [[ $colorCode == $rainbowColor ]]
+	then
+		colorCode=${rainbowColors[$rainbowColorIndex]}
+		numRainbowColors=${#rainbowColors[@]}
+		rainbowColorIndex=$(($rainbowColorIndex +1))
+		rainbowColorIndex=$(($rainbowColorIndex %$numRainbowColors))
+	fi
+
+	printf "\033[$foregroundCode;5;$colorCodem$text\033[0m"
 }
 
 
@@ -76,30 +90,37 @@ function rand {
 color=-1
 colorBackground=0
 inline=0
+whitespace=1
 while (( "$#" ))
 do
 	case $1 in
-	    -bk|--black)		color=0 ;;
-		-r|--red) 			color=1 ;;
-		-g|--green) 		color=2 ;;
-		-y|--yellow) 		color=3 ;;
-		-b|--blue) 			color=4 ;;
-		-m|--magenta) 		color=5 ;;
-		-c|--cyan) 			color=6 ;;
-		-w|--white) 		color=7 ;;
-		-dg|--dark-grey) 	color=8 ;;
-		-R|--Red) 			color=9 ;;
-		-G|--Green) 		color=10 ;;
-		-Y|--Yellow) 		color=11 ;;
-		-B|--Blue) 			color=12 ;;
-		-M|--Magenta) 		color=13 ;;
-		-C|--Cyan) 			color=14 ;;
-		-W|--White) 		color=15 ;;
-		-BK|--Black) 		color=16 ;;
-		-fg|--foreground)	colorBackground=0 ;;
-		-bg|--background) 	colorBackground=1 ;;
-		-il|--in-line)		inline=1 ;;
-		-ran|--random)		color=$(rand 255) ;;
+	    -bk|--black)			color=0 ;;
+		-r|--red) 				color=1 ;;
+		-g|--green) 			color=2 ;;
+		-y|--yellow) 			color=3 ;;
+		-b|--blue) 				color=4 ;;
+		-m|--magenta) 			color=5 ;;
+		-c|--cyan) 				color=6 ;;
+		-w|--white) 			color=7 ;;
+		-dg|--dark-grey) 		color=8 ;;
+		-R|--Red) 				color=9 ;;
+		-G|--Green) 			color=10 ;;
+		-Y|--Yellow) 			color=11 ;;
+		-B|--Blue) 				color=12 ;;
+		-M|--Magenta) 			color=13 ;;
+		-C|--Cyan) 				color=14 ;;
+		-W|--White) 			color=15 ;;
+		-BK|--Black) 			color=16 ;;
+		-fg|--foreground)		colorBackground=0 ;;
+		-bg|--background) 		colorBackground=1 ;;
+		-il|--in-line)			inline=1 ;;
+		-nw|--no-whitespaces) 	whitespace=0 ;;
+		-yw|--yes-whitespaces) 	whitespace=1 ;;
+		-ran|--random)			color=$(rand 255) ;;
+		-rb|--rainbow)		
+			color=$rainbowColor
+			rainbowColorIndex=0
+		;;
 		-rgb5)
 			IFS=, read r g b <<< "$2"
 			if [[ $r && $g && $b ]]
@@ -154,7 +175,12 @@ do
 		;;
 		# Actually print the text
 	    *) 
-			printColoredText "$1" $color $colorBackground 
+			text="$1"
+			printColoredText $text $color $colorBackground 
+			if [[ $whitespace == 1 ]]
+			then
+				printf " "
+			fi
 		;;
 	esac
 	shift
