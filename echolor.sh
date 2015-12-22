@@ -10,6 +10,7 @@
 rainbowColor=-2
 rainbowColorIndex=0
 rainbowColors=( 1 2 3 )
+numRainbowColors=${#rainbowColors[@]}
 
 foreground=38
 background=48
@@ -38,10 +39,15 @@ function printColoredText {
 
 	if [[ $colorCode == $rainbowColor ]]
 	then
-		colorCode=${rainbowColors[$rainbowColorIndex]}
-		numRainbowColors=${#rainbowColors[@]}
-		rainbowColorIndex=$(($rainbowColorIndex +1))
-		rainbowColorIndex=$(($rainbowColorIndex %$numRainbowColors))
+		for (( i=0 ; i < ${#text} ; i++ ))
+		do 
+			colorCode=${rainbowColors[$rainbowColorIndex]}
+			rainbowColorIndex=$(($rainbowColorIndex +1))
+			rainbowColorIndex=$(($rainbowColorIndex %$numRainbowColors))
+			character=${text:i:1}
+			printf "\033[$foregroundCode;5;$colorCode m$character\033[0m"
+		done
+		return
 	fi
 
 	printf "\033[$foregroundCode;5;$colorCode m$text\033[0m"
