@@ -9,7 +9,7 @@
 
 rainbowColor=-2
 rainbowColorIndex=0
-rainbowColors=( 1 2 3 )
+rainbowColors=( 196 208 226 118 46 48 51 33 21 93 201 198)
 numRainbowColors=${#rainbowColors[@]}
 
 foreground=38
@@ -33,7 +33,7 @@ function printColoredText {
 
 	if [[ $colorCode == -1 ]] 
 	then
-		printf "\033[0m$text"
+		printf "\033[0 m$text"
 		return
 	fi
 
@@ -55,9 +55,9 @@ function printColoredText {
 
 
 function printUsage {
-	echolor -R "\nError!"
-	echolor -il -W "Example: " -C "echolor -B G -R o -Y o -B g -G l -R e" -W " will print: "
-	echolor -B G -R o -Y o -B g -G l -R e
+	$0 -R "\nError!"
+	$0 -il -W "Example: " -C "$0 -B G -R o -Y o -B g -G l -R e" -W " will print: "
+	$0 -B G -R o -Y o -B g -G l -R e
 	exit -1
 }
 
@@ -87,7 +87,7 @@ function getColorCode {
 color=-1
 colorBackground=0
 inline=0
-whitespace=1
+whitespace=0
 while (( "$#" ))
 do
 	case $1 in
