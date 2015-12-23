@@ -45,12 +45,12 @@ function printColoredText {
 			rainbowColorIndex=$(($rainbowColorIndex +1))
 			rainbowColorIndex=$(($rainbowColorIndex %$numRainbowColors))
 			character=${text:i:1}
-			printf "\033[$foregroundCode;5;$colorCode m$character\033[0m"
+			printf "\033[${foregroundCode};5;${colorCode}m${character}\033[0m"
 		done
 		return
 	fi
 
-	printf "\033[$foregroundCode;5;$colorCode m$text\033[0m"
+	printf "\033[${foregroundCode};5;${colorCode}m${text}\033[0m"
 }
 
 
