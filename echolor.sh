@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# Original Source:
+# https://github.com/Gruppio/Echolor.git
+
 # Michele Gruppioni 2015
 # http://www.michelegruppioni.com
 
@@ -9,11 +12,14 @@
 
 rainbowColor=-2
 rainbowColorIndex=0
-rainbowColors=( 196 208 226 118 46 48 51 33 21 93 201 198)
+rainbowColors=( 196 208 226 118 46 48 51 33 21 93 201 198 )
 numRainbowColors=${#rainbowColors[@]}
 
 foreground=38
 background=48
+
+
+
 
 
 # $3 The text
@@ -53,15 +59,7 @@ function printColoredText {
 	printf "\033[${foregroundCode};5;${colorCode}m${text}\033[0m"
 }
 
-
-function printUsage {
-	$0 -R "\nError!"
-	$0 -il -W "Example: " -C "$0 -B G -R o -Y o -B g -G l -R e" -W " will print: "
-	$0 -B G -R o -Y o -B g -G l -R e
-	exit -1
-}
-
-
+# Check if the $1 parameter is a number > 0 and <= $2
 function isInRange {
 	if [[ "$1" =~ ^[0-9]+$ ]] && [ "$1" -ge 0 -a "$1" -le $2 ] && [ $# == 2 ]
 	then
@@ -83,6 +81,66 @@ function getColorCode {
 	fi
 }
 
+function printUsage {
+	$0 "\n"
+	$0 --rainbow "===================================="
+	$0 -W        " $0                                 "
+	$0 --rainbow "   The most colorful echo command   "
+	$0 --rainbow "===================================="
+
+	$0 -Y "\n\nUsage:"
+	$0 -W "$0 [[options] text]"
+	$0 -W "Typical usage: " -G "$0 color1 text1 color2 text2 ..."
+
+	$0 -Y "\n\nOptions:"
+	$0 -C " -h|--help" 			-W " Print the correct usage" 
+	$0 -C " -bk|--black" 		-W " Set the color to black" -bk " example"
+	$0 -C " -r|--red" 			-W " Set the color to red" -r " example"
+	$0 -C " -g|--green" 		-W " Set the color to green" -g " example"
+	$0 -C " -y|--yellow" 		-W " Set the color to yellow" -y " example"
+	$0 -C " -b|--blue" 			-W " Set the color to blue" -b " example"
+	$0 -C " -m|--magenta" 		-W " Set the color to magenta" -m " example"
+	$0 -C " -c|--cyan" 			-W " Set the color to cyan" -c " example"
+	$0 -C " -w|--white" 		-W " Set the color to white" -w " example"
+	$0 -C " -gy|--grey" 		-W " Set the color to dark grey" -gy " example"
+	$0 -C " -R|--Red"			-W " Set the color to bright red" -R " example"
+	$0 -C " -G|--Green"			-W " Set the color to bright green" -G " example"
+	$0 -C " -Y|--Yellow"		-W " Set the color to bright yellow" -Y " example"
+	$0 -C " -B|--Blue"			-W " Set the color to bright blue" -B " example"
+	$0 -C " -M|--Magenta"		-W " Set the color to bright magenta" -M " example"
+	$0 -C " -C|--Cyan"			-W " Set the color to bright cyan" -C " example"
+	$0 -C " -W|--White"			-W " Set the color to white" -W " example"
+	$0 -C " -Gy|--Gray"			-W " Set the color to bright grey" -Gy " example"
+	$0 -C " -rgb5"				-W " Set the color from the R G B components.\n The R G B components must have a range between 0-5 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 1,2,3 text \n"
+	$0 -C " -rgb100"			-W " Set the color from the R G B components.\n The R G B components must have a range between 0-100 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 10,20,30 text \n"
+	$0 -C " -rgb|-rgb255"		-W " Set the color from the R G B components.\n The R G B components must have a range between 0-255 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 100,200,255 text \n"
+	$0 -C " -fg|--foreground"	-W " Color the foreground ( default )"
+	$0 -C " -bg|--background"	-W " Color the background " -bg -R " example " -fg ""
+	$0 -C " -il|--in-line"		-W " With this option the command will not print the new line character after the execution\n"
+	$0 -C " -ran|--random"		-W " Set a random color"
+	$0 -C " -rb|--rainbow"		-W " Set a different color for each character printed " -rb "example"
+	$0 -C " -code|--color-code <code>" -W " Set the color to the specified color code, the code must be a number between 0-255.\n"
+	$0 -C " --get-color-code <r,g,b>" 	-W " Print the color code from the R G B components. The R G B components must have a range between 0-255 and must be divided by a comma without spaces.\n"
+
+
+
+	$0 -Y "\n\nExamples:"
+	$0 -il -G "$0 text" -W " will print: "
+	$0 text
+	$0 -il -G "$0 --Red RedText" -W " will print: "
+	$0 --Red RedText
+	$0 -il -G "$0 --Green GreenText" -W " will print: "
+	$0 --Green GreenText
+	$0 -il -G "$0 --Blue BlueText" -W " will print: "
+	$0 --Blue BlueText
+	$0 -il -G "$0 --Red RedText --Green GreenText --Blue BlueText" -W " will print: "
+	$0 --Red RedText --Green GreenText --Blue BlueText
+	$0 -il -G "$0 -B G -R o -Y o -B g -G l -R e" -W " will print: "
+	$0 -B G -R o -Y o -B g -G l -R e
+	$0 "\n"
+	exit -1
+}
+
 # Main
 color=-1
 colorBackground=0
@@ -100,7 +158,7 @@ do
 		-m|--magenta) 		color=5 ;;
 		-c|--cyan) 			color=6 ;;
 		-w|--white) 		color=7 ;;
-		-dg|--dark-grey) 	color=8 ;;
+		-Gy|--Grey) 		color=8 ;;
 		-R|--Red) 			color=9 ;;
 		-G|--Green) 		color=10 ;;
 		-Y|--Yellow) 		color=11 ;;
@@ -108,7 +166,7 @@ do
 		-M|--Magenta) 		color=13 ;;
 		-C|--Cyan) 			color=14 ;;
 		-W|--White) 		color=15 ;;
-		-BK|--Black) 		color=16 ;;
+		-gy|--gray) 		color=16 ;;
 		-fg|--foreground)	colorBackground=0 ;;
 		-bg|--background) 	colorBackground=1 ;;
 		-il|--in-line)		inline=1 ;;
