@@ -87,7 +87,7 @@ function getColorCode {
 color=-1
 colorBackground=0
 inline=0
-whitespace=0
+
 while (( "$#" ))
 do
 	case $1 in
@@ -113,11 +113,26 @@ do
 		-bg|--background) 	colorBackground=1 ;;
 		-il|--in-line)		inline=1 ;;
 		-ran|--random)		color=$(($RANDOM %255)) ;;
-		-nw|--no-whitespaces) 	whitespace=0 ;;
-		-yw|--yes-whitespaces) 	whitespace=1 ;;
 		-rb|--rainbow)		
 			color=$rainbowColor
 			rainbowColorIndex=0
+		;;
+		-code|--color-code) 
+			color=$2
+			shift
+		;;
+		--get-color-code) 
+			IFS=, read r g b <<< "$2"
+			if [[ $r && $g && $b ]]
+			then
+				r=$(($r/51))
+				g=$(($g/51))
+				b=$(($b/51))
+				getColorCode $r $g $b
+				exit 0
+			else
+				printUsage
+			fi
 		;;
 		-rgb5)
 			IFS=, read r g b <<< "$2"
@@ -155,8 +170,8 @@ do
 				printUsage
 			fi
 		;;
-		-hex)
-			if [[ $# != 0 ]]
+		-h|--hex)
+			if [[ $# > 1 && $2 =~ ^[0-9A-Fa-f]{6}$ ]]
 			then
 				hex=$2
 				r=$(printf "%d\n" 0x${hex:0:2}) 
@@ -171,14 +186,10 @@ do
 				printUsage
 			fi
 		;;
-		# Actually print the text
+		# print the text
 	    *) 
 			text=$1
 			printColoredText "$text" $color $colorBackground 
-			if [[ $whitespace == 1 ]]
-			then
-				printf " "
-			fi
 		;;
 	esac
 	shift
@@ -188,4 +199,6 @@ if [[ $inline == 0 ]]
 then
 	printf "\n"
 fi
+
+exit 0
 
