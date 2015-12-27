@@ -12,10 +12,8 @@ Bash scripting is great but is not very user friendly if you want to color in yo
 ```
 
 ### All Options Available:
-* -h|--help
-    * Print the correct usage
-* -bk|--black
-    * Set the color to black
+* **-h|--help** -> Print the correct usage
+* **-bk|--black** -> Set the color to black
 	
 
 
