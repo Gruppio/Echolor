@@ -13,7 +13,7 @@ Bash scripting is great but is not very user friendly if you want to color in yo
 
 ### All Options Available:
 * **-h | --help** Print the correct usage
-* **-bk | --black** Set the color to black
+* **-bk | --black** Print the following parameters with a black color
 * **-r | --red** Set the color to red
 * **-g | --green** Set the color to green
 * **-y | --yellow** Set the color to yellow
