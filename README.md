@@ -14,6 +14,16 @@ Bash scripting is great but is not very user friendly if you want to color in yo
 ### All Options Available:
 * **-h | --help** Print the correct usage
 * **-bk | --black** Set the color to black
+* **-r | --red** Set the color to red
+* **-g | --green** Set the color to green
+* **-y | --yellow** Set the color to yellow
+* **-b | --blue** Set the color to blue
+* **-m | --black** Set the color to magenta
+* **-c | --cyan** Set the color to cyan
+* **-w | --white** Set the color to white
+* **-gy | --gray** Set the color to gray
+
+
 	
 
 
