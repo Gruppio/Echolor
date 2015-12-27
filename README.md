@@ -1,15 +1,22 @@
 # Echolor
-The most colorful echo command!
+**The most colorful echo command!**
 
-Bash scripting is great but is not very user friendly when you want to put some color in your output text.
+Bash scripting is great but is not very user friendly if you want to color in your output text.
 
-echolor is an improved echo command that features some super useful options for color the printed text.
+**Echolor** is an improved echo command that features some super useful options for color the printed text.
 
 ### Example
 ```Shell
-# This line will print the text with a red color
+# This command will print the text to the standard output with a red color
 ./echolor --Red "Red Text"
 ```
+
+### All Options Available:
+* -h|--help
+    * Print the correct usage
+* -bk|--black
+    * Set the color to black
+	
 
 
 ## Requirements:

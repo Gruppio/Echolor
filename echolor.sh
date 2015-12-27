@@ -111,6 +111,7 @@ function printUsage {
 	$0 -C " -C|--Cyan"			-W " Set the color to bright cyan" -C " example"
 	$0 -C " -W|--White"			-W " Set the color to white" -W " example"
 	$0 -C " -Gy|--Gray"			-W " Set the color to bright grey" -Gy " example"
+	$0 -C " -h|--hex"			-W " Set the color from a hex format.\n The hex color shall not start with the # but just 6 hex digits.\n example: " -G "$0 --hex F8E4B0 text \n"
 	$0 -C " -rgb5"				-W " Set the color from the R G B components.\n The R G B components must have a range between 0-5 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 1,2,3 text \n"
 	$0 -C " -rgb100"			-W " Set the color from the R G B components.\n The R G B components must have a range between 0-100 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 10,20,30 text \n"
 	$0 -C " -rgb|-rgb255"		-W " Set the color from the R G B components.\n The R G B components must have a range between 0-255 and must be divided by a comma without spaces.\n example: " -G "$0 -rgb5 100,200,255 text \n"
