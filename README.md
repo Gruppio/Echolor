@@ -31,10 +31,10 @@ Bash scripting is great but is not very user friendly if you want to color in yo
 * **-W | --White** Print the following parameters with a bright white color
 * **-Gy | --Gray** Print the following parameters with a bright gray color
 * **-h | --hex** Print the following parameters with a color from in a hex format. The hex color shall not start with the # but just 6 hex digits. 
-    ### Example: 
-    ```Shell 
-     ./echolor --hex F8E4B0 text
-    ```
+### Example: 
+```Shell 
+ ./echolor --hex F8E4B0 text
+```
 
 	
 
