@@ -152,6 +152,10 @@ function printUsage {
 	
 	$0 -il -G "$0 -B G -R o -Y o -B g -G l -R e" -W " will print: "
 	$0 -B G -R o -Y o -B g -G l -R e
+
+	$0 -Y "\n\nInfo:"
+	$0 -Gy "Original Sources at: https://github.com/Gruppio/Echolor.git"
+	$0 -Gy "Created by Gruppio 2015"
 	
 	$0 "\n"
 	exit -1

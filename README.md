@@ -48,6 +48,14 @@ Bash scripting is great but is not very user friendly if you want to color in yo
 ## Requirements:
 A terminal that support 256 colors.
 
+## How to Install:
+```Shell
+git clone https://github.com/Gruppio/Echolor.git
+cd Echolor
+./echolor -R "Hi"
+# or
+./install.sh # This will just copy ./echolor to /usr/local/bin
+```
 
 
 
