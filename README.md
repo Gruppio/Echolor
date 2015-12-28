@@ -5,11 +5,13 @@ Bash scripting is great but is not very user friendly if you want to color in yo
 
 **Echolor** is an improved echo command that features some super useful options for color the printed text.
 
-### Example
+### Example:
 ```Shell
 # This command will print the text to the standard output with a red color
 ./echolor --Red "Red Text"
 ```
+### More Examples:
+![alt Examples](https://raw.github.com/Gruppio/Echolor/assets/Examples.png "Examples")
 
 ### All Options Available:
 * **-h | --help** 	Print the correct usage
