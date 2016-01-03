@@ -1,7 +1,7 @@
 ![alt Echolor](https://raw.github.com/Gruppio/Echolor/assets/Header.png "Echolor")
 
 # Echolor
-#### The most colorful echo command
+#### The most colorful echo command ...Bring colors to your terminal Scripts!
 
 Bash scripting is great but is not very user friendly if you want to color in your output text.
 
