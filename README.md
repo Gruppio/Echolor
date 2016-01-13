@@ -1,5 +1,7 @@
 ![alt Echolor](https://raw.github.com/Gruppio/Echolor/assets/Header.png "Echolor")
 
+[![Analytics](https://ga-beacon.appspot.com/UA-39980089-6/Gruppio/Echolor)](https://github.com/igrigorik/ga-beacon)
+
 # Echolor
 #### The most colorful echo command ...Bring colors to your terminal Scripts!
 
